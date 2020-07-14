@@ -12,7 +12,8 @@ $nombre="";
 $genero="";
 $plataforma="";
 $precio="";   
-$codVideojuego="";                       
+$codVideojuego=""; 
+$hidden="hidden";                      
 //echo "Éxito: Se realizó una conexión apropiada a MySQL! La base de datos mi_bd es genial." . PHP_EOL;
 //echo "Información del host: " . mysqli_get_host_info($conection) . PHP_EOL;
 if (isset($_POST["nombre"])&&isset($_POST["genero"])&&isset($_POST["plataforma"])&&isset($_POST["precio"])&&$_POST["accion"]=="Agregar")
@@ -48,6 +49,7 @@ if(isset($_GET["update"]))
         $precio=$row1["precio"];
         $codVideojuego=$row1["cod_videojuego"];
         $accion="Modificar";
+        $hidden="";
     }
 }
 if(isset($_GET["delete"]))
@@ -99,7 +101,7 @@ if(isset($_GET["delete"]))
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-white mb-4">Lista de videojuegos</h2>
-                        <table class="table text-white-50 text-center  table-bordered ">
+                        <table class="table text-white-50 text-center table-bordered ">
                             <tr>
                                 <td>Codigo</td>
                                 <td>Nombre</td>
@@ -144,7 +146,7 @@ if(isset($_GET["delete"]))
                         <div class="featured-text text-center text-lg-left">
                             <h4>Registro de videojuegos</h4>
                             
-                            <form name="forma" method="post" class="form" action="http://localhost/CRUDPHP/index.php">
+                            <form name="forma" method="post" class="form" action="/CRUDPHP/index.php">
                                 <input type="hidden" name="codVideojuego" value="<?php echo $codVideojuego ?>">
                                 <label for="nombre">Nombre:</label><br>
                                 <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required><br>
@@ -163,8 +165,9 @@ if(isset($_GET["delete"]))
                                     <option value="Nintendo">Nintendo</option>
                                 </select><br><br>
                                 <label for="precio">Precio:</label><br>
-                                <input type="text" id="precio" name="precio" value="<?php echo $precio; ?>" required><br><br>
+                                <input type="text" id="precio" name="precio" value="<?php echo $precio; ?>" required pattern="[0-9.0]+"><br><br>
                                 <input type="submit" name="accion" value="<?php echo $accion ?>">
+                                <input type="button" name="cancelar" value="Cancelar" visibility="<?php echo $hidden?>" onclick="document.location='index.php'">
                             </form> 
 
                         </div>
