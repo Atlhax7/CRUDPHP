@@ -14,26 +14,16 @@ $hidden="hidden";
 if (isset($_POST["nombre"])&&isset($_POST["genero"])&&isset($_POST["plataforma"])&&isset($_POST["precio"])&&$_POST["accion"]=="Agregar")
 {
     insert($_POST["nombre"],$_POST["genero"],$_POST["plataforma"],$_POST["precio"]);
-    $nombre= $_POST["nombre"];
-    $genero=$_POST["genero"];
-    $plataforma=$_POST["plataforma"];
-    $precio=$_POST["precio"];
+    
     
 }
 else if (isset($_POST["genero"])&&isset($_POST["plataforma"])&&isset($_POST["precio"])&&$_POST["accion"]=="Modificar"){
-    $stmt = $conection->prepare("update videojuego set nombre=?,  genero=?,  plataforma=?, precio=? where cod_videojuego=?");
-    $stmt->bind_param("sssdi", $nombre, $genero, $plataforma,$precio,$codVideojuego);
-    $nombre= $_POST["nombre"];
-    $genero=$_POST["genero"];
-    $plataforma=$_POST["plataforma"];
-    $precio=$_POST["precio"];
-    $codVideojuego=$_POST["codVideojuego"];
-    $stmt->execute();
-    $stmt->close();
+
+    modify($_POST["nombre"], $_POST["genero"], $_POST["plataforma"],$_POST["precio"],$_POST["codVideojuego"]);
 }
 if(isset($_GET["update"]))
 {
-    $result = $conection->query("SELECT * FROM videojuego where cod_videojuego=".$_GET["update"]);
+    $result = findByCod($_GET["update"]);
     if ($result->num_rows > 0) {
         $row1=$result->fetch_assoc();
         $nombre=$row1["nombre"];
@@ -47,8 +37,7 @@ if(isset($_GET["update"]))
 }
 if(isset($_GET["delete"]))
 {
-    $sql = "DELETE FROM videojuego WHERE cod_videojuego=".$_GET["delete"];
-    $conection->query($sql);
+    remove($_GET["delete"]);
 }
 
 ?>
