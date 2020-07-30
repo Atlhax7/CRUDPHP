@@ -11,7 +11,7 @@ function insert($nombre, $genero, $plataforma, $precio)
 function findAll()
 {
     $conection = getConection();
-    $conection->query("SELECT * FROM VIDEOJUEGO");
-    return $conection;
+    return $conection->query("SELECT * FROM VIDEOJUEGO");;
 }?>
+
 
