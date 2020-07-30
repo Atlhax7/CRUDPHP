@@ -547,6 +547,29 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+#container form{
+  background: #fff;
+  width: 400px;
+  padding: 10px;
+}
+
+#container form img{
+  margin: 15px auto;
+  text-align: center;
+  display: block;
+
+}
+
+#container form input{
+  width: 90%;
+  padding: 5px;
+  font-size: 16pt;
+  display: block;
+  margin: 25px auto;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  text-align: center;
+}
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
