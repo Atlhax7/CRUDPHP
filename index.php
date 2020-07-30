@@ -94,16 +94,15 @@ if(isset($_GET["delete"]))
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-white mb-4">Lista de videojuegos</h2>
-                        <table class="table table-dark text-white-50 text-center table-bordered ">
-                            <thead class="thead-dark">
+                        <table class="table text-white-50 text-center table-bordered ">
                             <tr>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>Genero</th>
-                                <th>Plataforma</th>
-                                <th>Precio</th>
-                                <th>Modificar</th>
-                                <th>Eliminar</th>
+                                <td>Codigo</td>
+                                <td>Nombre</td>
+                                <td>Genero</td>
+                                <td>Plataforma</td>
+                                <td>Precio</td>
+                                <td>Modificar</td>
+                                <td>Eliminar</td>
                             </tr>
                             <?php 
                         $result = findAll();
@@ -159,7 +158,7 @@ if(isset($_GET["delete"]))
                                 <label for="precio">Precio:</label><br>
                                 <input type="text" id="precio" name="precio" value="<?php echo $precio; ?>" required pattern="[0-9.0]+"><br><br>
                                 <input type="submit" name="accion" value="<?php echo $accion ?>">
-                                <input type="button" name="cancelar" value="Cancelar" visibility="<?php  $hidden?>" onclick="document.location='index.php'">
+                                <input type="button" name="cancelar" value="Cancelar" visibility="<?php echo $hidden?>" onclick="document.location='index.php'">
                             </form> 
 
                         </div>
