@@ -1,12 +1,7 @@
 <?php
-$conection = mysqli_connect("127.0.0.1", "root", "", "videojuegos");
+include './Service/gameService.php';
 
-if (!$conection) {
-    echo "Error: No se pudo conectar a MySQL." ;
-    echo "errno de depuración: " . mysqli_connect_errno() ;
-    echo "error de depuración: " . mysqli_connect_error() ;
-    exit;
-}
+
 $accion="Agregar";
 $nombre="";
 $genero="";
@@ -18,14 +13,12 @@ $hidden="hidden";
 //echo "Información del host: " . mysqli_get_host_info($conection) . PHP_EOL;
 if (isset($_POST["nombre"])&&isset($_POST["genero"])&&isset($_POST["plataforma"])&&isset($_POST["precio"])&&$_POST["accion"]=="Agregar")
 {
-    $stmt = $conection->prepare("INSERT INTO videojuego (nombre, genero, plataforma,precio) VALUES (?, ?, ?,?)");
-    $stmt->bind_param("sssd", $nombre, $genero, $plataforma,$precio);
+    insert($_POST["nombre"],$_POST["genero"],$_POST["plataforma"],$_POST["precio"]);
     $nombre= $_POST["nombre"];
     $genero=$_POST["genero"];
     $plataforma=$_POST["plataforma"];
     $precio=$_POST["precio"];
-    $stmt->execute();
-    $stmt->close();
+    
 }
 else if (isset($_POST["genero"])&&isset($_POST["plataforma"])&&isset($_POST["precio"])&&$_POST["accion"]=="Modificar"){
     $stmt = $conection->prepare("update videojuego set nombre=?,  genero=?,  plataforma=?, precio=? where cod_videojuego=?");
@@ -113,9 +106,7 @@ if(isset($_GET["delete"]))
                                 <th>Eliminar</th>
                             </tr>
                             <?php 
-                        $sql = "SELECT * FROM videojuego";
-                        $result = $conection->query($sql);
-                        
+                        $result = findAll();
                         if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
